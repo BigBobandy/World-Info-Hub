@@ -1,16 +1,95 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap");
+
+:root {
+  --primary-color: #231f20;
+  --secondary-color: #ffc629;
+  --border-color: #b0b3b2;
+  --hover-color: #fab700;
+}
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  background-color: var(--primary-color);
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+}
+
+header {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  overflow: hidden;
-  margin: 0;
+  flex-wrap: wrap;
+  padding: 0.001rem;
+  background-color: var(--secondary-color);
+  position: relative;
+  min-width: 300px;
+}
+
+#title {
+  display: flex;
+  align-items: center;
+}
+
+form {
+  position: absolute;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  justify-content: flex-end;
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  color: var(--primary-color);
+}
+
+.search::placeholder {
+  color: var(--primary-color);
+}
+
+.search:focus {
+  outline: none;
+  background-color: var(--hover-color);
+}
+
+.search:hover {
+  background-color: var(--hover-color);
+}
+
+#search-button {
+  padding: 15px 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+#search-button:active {
+  transform: scale(0.97);
+}
+
+#search-icon {
+  color: var(--secondary-color);
+}
+
+.globe-icon {
+  font-size: 1.5rem;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
 }
