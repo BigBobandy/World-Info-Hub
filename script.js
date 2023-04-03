@@ -19,6 +19,14 @@ async function getCountries(url) {
   showCountries(data);
 }
 
+async function fetchGDPForCountry(countryCode) {
+  const url = `https://api.worldbank.org/v2/country/${countryCode}/indicator/NY.GDP.MKTP.CD?format=json&per_page=1`;
+  const result = await fetch(url);
+  const data = await result.json();
+
+  return data[1] && data[1][0] && data[1][0].value;
+}
+
 // Function to display country data on the page
 function showCountries(countries) {
   // Clear the content of the main element
@@ -39,14 +47,31 @@ function showCountries(countries) {
       languages && Object.values(languages)[0]
         ? Object.values(languages)[0]
         : "Unknown";
+        : "No Data Available";
 
     // Get the primary currency
+    // Check if the country object has the 'currencies' property and there's at least one currency available
     const primaryCurrency =
       country.currencies && Object.values(country.currencies)[0]
         ? `${Object.values(country.currencies)[0].name} (${
+        ? // If there's at least one currency available, use a template literal to create a formatted string
+          `${Object.values(country.currencies)[0].name} (${
             Object.values(country.currencies)[0].symbol
           })`
         : "Unknown";
+        : // If there's no currency data available, set the primaryCurrency variable to "No Data Available"
+          "No Data Available";
+
+    // Format population with commas
+    const formattedPopulation = population.toLocaleString();
+
+    // Fetch and display GDP for the country
+    fetchGDPForCountry(cca2).then((gdpValue) => {
+      const gdpElement = countryEl.querySelector(".gdp");
+      gdpElement.textContent = gdpValue
+        ? formatLargeNumber(gdpValue)
+        : "No Data Available";
+    });
 
     // Create a new div element for the country card
     const countryEl = document.createElement("div");
@@ -72,4 +97,17 @@ function showCountries(countries) {
     // Append the country card to the main element
     main.appendChild(countryEl);
   });
+}
+// Function to format large numbers making them more readable
+function formatLargeNumber(num) {
+  if (num >= 1e12) {
+    return (num / 1e12).toFixed(2) + " trillion";
+  } else if (num >= 1e9) {
+    return (num / 1e9).toFixed(2) + " billion";
+  } else if (num >= 1e6) {
+    return (num / 1e6).toFixed(2) + " million";
+  } else if (num >= 1e3) {
+    return (num / 1e3).toFixed(2) + " thousand";
+  }
+  return num;
 }
