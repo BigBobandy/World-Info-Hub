@@ -63,19 +63,15 @@ function showCountries(countries) {
     const primaryLanguage =
       languages && Object.values(languages)[0]
         ? Object.values(languages)[0]
-        : "Unknown";
         : "No Data Available";
 
-    // Get the primary currency
     // Check if the country object has the 'currencies' property and there's at least one currency available
     const primaryCurrency =
       country.currencies && Object.values(country.currencies)[0]
-        ? `${Object.values(country.currencies)[0].name} (${
         ? // If there's at least one currency available, use a template literal to create a formatted string
           `${Object.values(country.currencies)[0].name} (${
             Object.values(country.currencies)[0].symbol
           })`
-        : "Unknown";
         : // If there's no currency data available, set the primaryCurrency variable to "No Data Available"
           "No Data Available";
 
@@ -100,7 +96,6 @@ function showCountries(countries) {
       <div class="country-details">
         <h3 class="country-title">${commonName}</h3>
         <h4 class="country-population">
-          Population: <span class="population-number">${population}</span>
           Population: <span class="population-number">${formattedPopulation}</span>
         </h4>
         <h4 class="country-language">
