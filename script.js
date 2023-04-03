@@ -23,7 +23,10 @@ form.addEventListener("submit", (e) => {
 });
 
 // Add event listener for input event on the search bar
-searchBar.addEventListener("input", handleSearch);
+searchBar.addEventListener("input", (event) => {
+  handleSearch(event);
+  transitionCards();
+});
 
 // Store the fetched countries data in a variable
 let countriesData = [];
@@ -174,4 +177,30 @@ function handleSearch(event) {
     // If the search term is empty, display all countries
     showCountries(countriesData);
   }
+}
+
+// Function to smoothly transition country cards during search
+function transitionCards() {
+  // Get the search term from the search bar, trim whitespace, and convert it to lowercase
+  const searchTerm = searchBar.value.trim().toLowerCase();
+
+  // Select all the country cards on the page
+  const countryCards = document.querySelectorAll(".country-card");
+
+  // Loop through each country card
+  countryCards.forEach((countryCard) => {
+    // Get the country title text from the country card and convert it to lowercase
+    const countryTitle = countryCard
+      .querySelector(".country-title")
+      .textContent.toLowerCase();
+
+    // Check if the country title includes the search term
+    if (countryTitle.includes(searchTerm)) {
+      // If the search term matches, remove the 'filtered' class
+      countryCard.classList.remove("filtered");
+    } else {
+      // If the search term doesn't match, add the 'filtered' class
+      countryCard.classList.add("filtered");
+    }
+  });
 }
