@@ -5,6 +5,23 @@ const searchBar = document.getElementById("search-bar");
 // API URL to fetch country data
 const API_URL = "https://restcountries.com/v3.1/all";
 
+// Add an event listener to the form element to handle the search input
+form.addEventListener("submit", (e) => {
+  // Prevent the form from being submitted and refreshing the page
+  e.preventDefault();
+
+  // Get the search input value and trim any extra whitespace
+  const searchTerm = searchBar.value.trim();
+
+  // If there's a search term, filter the countries and display the results
+  if (searchTerm) {
+    filterCountries(searchTerm);
+  } else {
+    // If there's no search term, display all countries
+    getCountries(API_URL);
+  }
+});
+
 // Call getCountries() function to start fetching data
 getCountries(API_URL);
 
@@ -84,6 +101,7 @@ function showCountries(countries) {
         <h3 class="country-title">${commonName}</h3>
         <h4 class="country-population">
           Population: <span class="population-number">${population}</span>
+          Population: <span class="population-number">${formattedPopulation}</span>
         </h4>
         <h4 class="country-language">
           Language: <span class="language-name">${primaryLanguage}</span>
@@ -98,6 +116,23 @@ function showCountries(countries) {
     main.appendChild(countryEl);
   });
 }
+
+// Function to filter countries based on search input
+async function filterCountries(searchTerm) {
+  // Fetch all countries
+  const result = await fetch(API_URL);
+  const countries = await result.json();
+
+  // Filter the countries based on the search term
+  const filteredCountries = countries.filter((country) => {
+    // Check if the country name includes the search term (case-insensitive)
+    return country.name.common.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  // Display the filtered countries
+  showCountries(filteredCountries);
+}
+
 // Function to format large numbers making them more readable
 function formatLargeNumber(num) {
   if (num >= 1e12) {
