@@ -22,6 +22,12 @@ form.addEventListener("submit", (e) => {
   }
 });
 
+// Add event listener for input event on the search bar
+searchBar.addEventListener("input", handleSearch);
+
+// Store the fetched countries data in a variable
+let countriesData = [];
+
 // Call getCountries() function to start fetching data
 getCountries(API_URL);
 
@@ -34,13 +40,24 @@ async function getCountries(url) {
 
   // Call showCountries() function to display the country data on the page
   showCountries(data);
+
+  // Store the fetched data in countriesData variable
+  countriesData = data;
 }
 
+// Async function that takes country code as an argument and finds the gdp of the country using an API
 async function fetchGDPForCountry(countryCode) {
+  // fetch GDP data from the World Bank API
   const url = `https://api.worldbank.org/v2/country/${countryCode}/indicator/NY.GDP.MKTP.CD?format=json&per_page=1`;
+
+  // Await the fetch() function to get the data from the API URL
   const result = await fetch(url);
+  // Await the result.json() function to parse the fetched data as JSON
   const data = await result.json();
 
+  // Check if the data array has a second element, and if that element has a first element, and if that first element has a 'value' property
+  // If all these conditions are true, return the 'value' property (which represents the GDP value)
+  // If any of these conditions are false, return undefined
   return data[1] && data[1][0] && data[1][0].value;
 }
 
@@ -140,4 +157,21 @@ function formatLargeNumber(num) {
     return (num / 1e3).toFixed(2) + " thousand";
   }
   return num;
+}
+
+// Function to handle search input
+function handleSearch(event) {
+  // Get the search term from the input field
+  const searchTerm = event.target.value.trim();
+
+  // If the search term is not empty, filter the countries based on the search term
+  if (searchTerm) {
+    const filteredCountries = countriesData.filter((country) =>
+      country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    showCountries(filteredCountries);
+  } else {
+    // If the search term is empty, display all countries
+    showCountries(countriesData);
+  }
 }
