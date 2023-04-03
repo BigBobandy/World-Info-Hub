@@ -2,6 +2,7 @@
 
 :root {
   --primary-color: #231f20;
+  --primary-darker: #1c191a;
   --secondary-color: #ffc629;
   --border-color: #b0b3b2;
   --hover-color: #fab700;
@@ -12,7 +13,7 @@
 }
 
 body {
-  background-color: var(--primary-color);
+  background-color: var(--primary-darker);
   font-family: "Poppins", sans-serif;
   margin: 0;
 }
@@ -40,6 +41,31 @@ form {
   align-items: center;
 }
 
+.filter-options {
+  display: flex;
+}
+
+#region-filter {
+  position: relative;
+  right: -13rem;
+  font-family: inherit;
+  font-weight: bold;
+  background-color: var(--secondary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+#region-filter:focus {
+  outline: none;
+}
+
+option {
+  font-family: inherit;
+  font-weight: bold;
+}
+
 .search {
   display: flex;
   justify-content: flex-end;
@@ -47,6 +73,7 @@ form {
   border: 2px solid var(--primary-color);
   border-radius: 10px;
   font-family: inherit;
+  font-weight: bold;
   font-size: 1rem;
   padding: 0.5rem 1rem;
   color: var(--primary-color);
@@ -92,4 +119,46 @@ form {
 main {
   display: flex;
   flex-wrap: wrap;
+  margin: 0.2rem;
+}
+
+.country-card {
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: 2px solid var(--hover-color);
+  padding: 1rem;
+  width: 300px;
+  margin: 0.2rem;
+  color: var(--secondary-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.country-flag {
+  max-width: 100%;
+  max-height: 150px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.country-details {
+  margin-top: 1rem;
+}
+
+.country-title,
+.country-population,
+.country-language,
+.country-currency,
+.country-gdp {
+  margin: 0;
+}
+
+.population-number,
+.language-name,
+.currency-code,
+.gdp {
+  font-weight: normal;
 }

@@ -15,12 +15,65 @@
   <body>
     <header>
       <h1 id="title">W<i class="fas fa-globe globe-icon"></i>rld Info Hub</h1>
+      <div class="filter-options">
+        <select id="region-filter">
+          <option value="">Filter by Region</option>
+          <option value="north-america">North America</option>
+          <option value="south-america">South America</option>
+          <option value="africa">Africa</option>
+          <option value="asia">Asia</option>
+          <option value="europe">Europe</option>
+          <option value="Australia">Australia</option>
+        </select>
+      </div>
       <form id="form">
-        <input type="text" class="search" id="search" placeholder="Search..." />
+        <input
+          type="text"
+          class="search"
+          id="search-bar"
+          placeholder="Search..."
+        />
         <button id="search-button">
           <i id="search-icon" class="fa fa-search"></i>
         </button>
       </form>
     </header>
+    <main class="main" id="main">
+      <div class="country-card">
+        <img src="/usa.png" alt="US Flag" class="country-flag" />
+        <div class="country-details">
+          <h3 class="country-title">United States of America</h3>
+          <h4 class="country-population">
+            Population: <span class="population-number">350,000,000</span>
+          </h4>
+          <h4 class="country-language">
+            Language: <span class="language-name">English</span>
+          </h4>
+          <h4 class="country-currency">
+            Currency: <span class="currency-code">USD</span>
+          </h4>
+          <h4 class="country-gdp">GDP: <span class="gdp">23 Trillion</span></h4>
+        </div>
+      </div>
+      <!-- More country cards go here -->
+
+      <div class="country-card">
+        <img src="/usa.png" alt="US Flag" class="country-flag" />
+        <div class="country-details">
+          <h3 class="country-title">United States of America</h3>
+          <h4 class="country-population">
+            Population: <span class="population-number">350,000,000</span>
+          </h4>
+          <h4 class="country-language">
+            Language: <span class="language-name">English</span>
+          </h4>
+          <h4 class="country-currency">
+            Currency: <span class="currency-code">USD</span>
+          </h4>
+          <h4 class="country-gdp">GDP: <span class="gdp">23 Trillion</span></h4>
+        </div>
+      </div>
+      <!-- More country cards go here -->
+    </main>
   </body>
 </html>
