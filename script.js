@@ -1,11 +1,12 @@
 const main = document.getElementById("main");
 const form = document.getElementById("form");
 const searchBar = document.getElementById("search-bar");
+const regionFilter = document.getElementById("region-filter");
 
 // API URL to fetch country data
 const API_URL = "https://restcountries.com/v3.1/all";
 
-// Add an event listener to the form element to handle the search input
+// Event listener to the form element to handle the search input
 form.addEventListener("submit", (e) => {
   // Prevent the form from being submitted and refreshing the page
   e.preventDefault();
@@ -22,11 +23,14 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-// Add event listener for input event on the search bar
+// Event listener for input event on the search bar
 searchBar.addEventListener("input", (event) => {
   handleSearch(event);
   transitionCards();
 });
+
+// Event listener for the filter by region menu
+regionFilter.addEventListener("change", filterByRegion);
 
 // Store the fetched countries data in a variable
 let countriesData = [];
@@ -203,4 +207,24 @@ function transitionCards() {
       countryCard.classList.add("filtered");
     }
   });
+}
+
+// Function to filter the countries shown by what is selected in the filter by region menu
+function filterByRegion() {
+  // Get the selected region from the region filter
+  const selectedRegion = regionFilter.value;
+
+  // If the selected region is "All", display all countries
+  if (selectedRegion === "All") {
+    showCountries(countriesData);
+  } else {
+    // Filter the countries based on the selected region
+    const filteredCountries = countriesData.filter(
+      (country) =>
+        country.subregion === selectedRegion ||
+        country.region === selectedRegion
+    );
+    //Passing the filtered countries into the showCountries function
+    showCountries(filteredCountries);
+  }
 }
