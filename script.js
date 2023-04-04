@@ -49,6 +49,9 @@ async function getCountries(url) {
   // Parse the fetched data as JSON
   const data = await result.json();
 
+  // Sort the fetched data by the country name in alphabetical order
+  data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+
   // Call showCountries() function to display the country data on the page
   showCountries(data);
 
@@ -76,6 +79,9 @@ async function fetchGDPForCountry(countryCode) {
 function showCountries(countries) {
   // Clear the content of the main element
   main.innerHTML = "";
+
+  // Update the country counter with the number of countries being displayed
+  updateCountryCounter(countries.length);
 
   // Loop through each country in the countries array
   countries.forEach((country) => {
@@ -267,4 +273,11 @@ function populateRegionFilter() {
     // Append the option element to the region filter dropdown menu
     regionFilter.appendChild(subregionOption);
   });
+}
+
+function updateCountryCounter(count) {
+  const countryCounter = document.getElementById("country-counter");
+  countryCounter.textContent = `${count} ${
+    count === 1 ? "Country" : "Countries"
+  }`;
 }
