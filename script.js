@@ -80,7 +80,7 @@ function showCountries(countries) {
   // Clear the content of the main element
   main.innerHTML = "";
 
-  // Update the country counter with the number of countries being displayed
+  // Update the country counter with the number of countries being displayed by passing the current number of country cards to the function
   updateCountryCounter(countries.length);
 
   // Loop through each country in the countries array
@@ -95,9 +95,12 @@ function showCountries(countries) {
 
     // Get the primary language
     const primaryLanguage =
+      //Checks if the languages object exists and has atleast one value
       languages && Object.values(languages)[0]
-        ? Object.values(languages)[0]
-        : "No Data Available";
+        ? //If the languages both exists and has atleast one value then Object.values(laguages)[0] is assigned to the variable
+          Object.values(languages)[0]
+        : //Else this string is assigned to the variable
+          "No Data Available";
 
     // Check if the country object has the 'currencies' property and there's at least one currency available
     const primaryCurrency =
@@ -112,12 +115,16 @@ function showCountries(countries) {
     // Format population with commas
     const formattedPopulation = population.toLocaleString();
 
-    // Fetch and display GDP for the country
+    // Fetches the GDP data for a country using the cca2 code(two letter country code like 'US') once the data is fetched successfully, the callback function is called with the fetched gdpValue
     fetchGDPForCountry(cca2).then((gdpValue) => {
+      // Select the gdpElement in the country card using queryselector
       const gdpElement = countryEl.querySelector(".gdp");
+      //Set the text content of the element based on the gdp value
       gdpElement.textContent = gdpValue
-        ? formatLargeNumber(gdpValue)
-        : "No Data Available";
+        ? //If the gdp value exists, format it using the formatLargeNumber function
+          formatLargeNumber(gdpValue)
+        : //Else set the text content to "No Data Available"
+          "No Data Available";
     });
 
     // Create a new div element for the country card
@@ -275,8 +282,11 @@ function populateRegionFilter() {
   });
 }
 
+// Function that updates the counter element. It takes count as an argument which represents the number of cards currently being displayed
 function updateCountryCounter(count) {
+  // Assigning the counter element to a variable
   const countryCounter = document.getElementById("country-counter");
+  //Checks if count is equal to one in order to make the displayed text grammatically correct
   countryCounter.textContent = `${count} ${
     count === 1 ? "Country" : "Countries"
   }`;
