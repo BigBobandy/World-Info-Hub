@@ -36,7 +36,11 @@ regionFilter.addEventListener("change", filterByRegion);
 let countriesData = [];
 
 // Call getCountries() function to start fetching data
-getCountries(API_URL);
+getCountries(API_URL).then(() => {
+  // Once the data has been fetched and stored in countriesData,
+  // call the populateRegionFilter() function to populate the dropdown menu
+  populateRegionFilter();
+});
 
 // Function to fetch country data from the API
 async function getCountries(url) {
@@ -223,4 +227,44 @@ function filterByRegion() {
     //Passing the filtered countries into the showCountries function
     showCountries(filteredCountries);
   }
+}
+
+// Function to populate the region filter menu
+function populateRegionFilter() {
+  // Create a Set to store unique regions
+  const uniqueRegions = new Set();
+  // Create a Set to store unique subregions
+  const uniqueSubregions = new Set();
+
+  // Loop through each country in the countriesData array
+  countriesData.forEach((country) => {
+    // If the country has a region, add it to the uniqueRegions Set
+    if (country.region) uniqueRegions.add(country.region);
+    // If the country has a subregion, add it to the uniqueSubregions Set
+    if (country.subregion) uniqueSubregions.add(country.subregion);
+  });
+
+  // Loop through each unique region
+  uniqueRegions.forEach((region) => {
+    // Create an option element for the dropdown menu
+    const regionOption = document.createElement("option");
+    // Set the value attribute of the option element to the region
+    regionOption.value = region;
+    // Set the inner text of the option element to the region
+    regionOption.textContent = region;
+    // Append the option element to the region filter dropdown menu
+    regionFilter.appendChild(regionOption);
+  });
+
+  // Loop through each unique subregion
+  uniqueSubregions.forEach((subregion) => {
+    // Create an option element for the dropdown menu
+    const subregionOption = document.createElement("option");
+    // Set the value attribute of the option element to the subregion
+    subregionOption.value = subregion;
+    // Set the inner text of the option element to the subregion
+    subregionOption.textContent = subregion;
+    // Append the option element to the region filter dropdown menu
+    regionFilter.appendChild(subregionOption);
+  });
 }
