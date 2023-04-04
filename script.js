@@ -48,7 +48,7 @@ async function getCountries(url) {
   // Call showCountries() function to display the country data on the page
   showCountries(data);
 
-  // Store the fetched data in countriesData variable
+  // Store the fetched data in countriesData array so that the api fetch request only occurs once
   countriesData = data;
 }
 
@@ -137,13 +137,9 @@ function showCountries(countries) {
 }
 
 // Function to filter countries based on search input
-async function filterCountries(searchTerm) {
-  // Fetch all countries
-  const result = await fetch(API_URL);
-  const countries = await result.json();
-
+function filterCountries(searchTerm) {
   // Filter the countries based on the search term
-  const filteredCountries = countries.filter((country) => {
+  const filteredCountries = countriesData.filter((country) => {
     // Check if the country name includes the search term (case-insensitive)
     return country.name.common.toLowerCase().includes(searchTerm.toLowerCase());
   });
