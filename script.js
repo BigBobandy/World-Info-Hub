@@ -32,7 +32,7 @@ searchBar.addEventListener("input", (event) => {
 // Event listener for the filter by region menu
 regionFilter.addEventListener("change", filterByRegion);
 
-// Store the fetched countries data in a variable
+// Store the fetched countries data in an empty array
 let countriesData = [];
 
 // Call getCountries() function to start fetching data
@@ -112,19 +112,27 @@ function showCountries(countries) {
         : // If there's no currency data available, set the primaryCurrency variable to "No Data Available"
           "No Data Available";
 
-    // Format population with commas
+    // Format population number with commas to make it more readable
     const formattedPopulation = population.toLocaleString();
 
     // Fetches the GDP data for a country using the cca2 code(two letter country code like 'US') once the data is fetched successfully, the callback function is called with the fetched gdpValue
     fetchGDPForCountry(cca2).then((gdpValue) => {
-      // Select the gdpElement in the country card using queryselector
+      // Calculate GDP per capita
+      const gdpPerCapita = gdpValue / population;
+      // Select the gdpElement and gdpPerCapitaElement in the country card using querySelector
       const gdpElement = countryEl.querySelector(".gdp");
+      const gdpPerCapitaElement = countryEl.querySelector(".gdp-percapita");
       //Set the text content of the element based on the gdp value
       gdpElement.textContent = gdpValue
         ? //If the gdp value exists, format it using the formatLargeNumber function
           formatLargeNumber(gdpValue)
         : //Else set the text content to "No Data Available"
           "No Data Available";
+
+      // Set the text content of the gdpPerCapitaElement based on the gdpPerCapita value
+      gdpPerCapitaElement.textContent = gdpValue
+        ? formatGdpPerCapita(gdpPerCapita)
+        : "No Data Available";
     });
 
     // Create a new div element for the country card
@@ -145,7 +153,8 @@ function showCountries(countries) {
         <h4 class="country-currency">
           Currency: <span class="currency-code">${primaryCurrency}</span>
         </h4>
-        <h4 class="country-gdp">GDP: <span class="gdp">23 Trillion</span></h4>
+        <h4 class="country-gdp">GDP: <span class="gdp">Loading...</span></h4>
+        <h4 class="country-gdp-percapita">GDP Per Capita: <span class="gdp-percapita">Loading...</span></h4>
       </div>`;
 
     // Append the country card to the main element
@@ -298,4 +307,14 @@ function updateCountryCounter(count) {
     }`;
     countryCounter.classList.remove("fade-out");
   }, 200);
+}
+
+function formatGdpPerCapita(number) {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  });
+
+  return formatter.format(number);
 }

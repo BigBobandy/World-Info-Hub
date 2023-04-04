@@ -166,14 +166,20 @@ main {
 .country-population,
 .country-language,
 .country-currency,
-.country-gdp {
+.country-gdp,
+.country-gdp-percapita {
   margin: 0;
+}
+
+.country-title {
+  text-decoration: underline;
 }
 
 .population-number,
 .language-name,
 .currency-code,
-.gdp {
+.gdp,
+.gdp-percapita {
   font-weight: normal;
 }
 
