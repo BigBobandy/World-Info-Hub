@@ -61,7 +61,7 @@ async function getCountries(url) {
 
 // Async function that takes country code as an argument and finds the gdp of the country using an API
 async function fetchGDPForCountry(countryCode) {
-  // fetch GDP data from the World Bank API
+  // fetch GDP data by passing the country code to the World Bank API
   const url = `https://api.worldbank.org/v2/country/${countryCode}/indicator/NY.GDP.MKTP.CD?format=json&per_page=1`;
 
   // Await the fetch() function to get the data from the API URL
@@ -286,8 +286,16 @@ function populateRegionFilter() {
 function updateCountryCounter(count) {
   // Assigning the counter element to a variable
   const countryCounter = document.getElementById("country-counter");
-  //Checks if count is equal to one in order to make the displayed text grammatically correct
-  countryCounter.textContent = `${count} ${
-    count === 1 ? "Country" : "Countries"
-  }`;
+
+  // Add 'fade-out' class to create fade-out effect
+  countryCounter.classList.add("fade-out");
+
+  // After the fade-out animation is complete, update the text content and remove 'fade-out' class
+  setTimeout(() => {
+    //Checks if count is equal to one in order to make the displayed text grammatically correct
+    countryCounter.textContent = `${count} ${
+      count === 1 ? "Country" : "Countries"
+    }`;
+    countryCounter.classList.remove("fade-out");
+  }, 200);
 }

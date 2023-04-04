@@ -181,4 +181,10 @@ main {
   margin-right: 1.5rem;
   font-family: inherit;
   font-weight: bold;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+#country-counter.fade-out {
+  opacity: 0;
 }
