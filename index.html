@@ -15,12 +15,21 @@
   </head>
   <body>
     <header>
-      <h1 id="title">W<i class="fas fa-globe globe-icon"></i>rld Info Hub</h1>
       <div class="filter-options">
         <select id="region-filter">
           <option value="All">Filter By Region: All</option>
         </select>
+        <select name="misc-filter" id="misc-filter">
+          <option value="All">Filter A-Z</option>
+          <option value="highest-gdp">GDP: Highest</option>
+          <option value="lowest-gdp">GDP: Lowest</option>
+          <option value="highest-gdp-percapita">GDP Per Capita: Highest</option>
+          <option value="lowest-gdp-percapita">GDP Per Capita: Lowest</option>
+          <option value="highest-population">Population: Highest</option>
+          <option value="lowest-population">Population: Lowest</option>
+        </select>
       </div>
+      <h1 id="title">W<i class="fas fa-globe globe-icon"></i>rld Info Hub</h1>
       <form id="form">
         <p id="country-counter">0 Countries</p>
         <input

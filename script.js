@@ -2,6 +2,7 @@ const main = document.getElementById("main");
 const form = document.getElementById("form");
 const searchBar = document.getElementById("search-bar");
 const regionFilter = document.getElementById("region-filter");
+const miscFilter = document.getElementById("misc-filter");
 
 // API URL to fetch country data
 const API_URL = "https://restcountries.com/v3.1/all";
@@ -30,7 +31,9 @@ searchBar.addEventListener("input", (event) => {
 });
 
 // Event listener for the filter by region menu
-regionFilter.addEventListener("change", filterByRegion);
+regionFilter.addEventListener("change", filterByRegionAndMisc);
+
+miscFilter.addEventListener("change", filterByRegionAndMisc);
 
 // Store the fetched countries data in an empty array
 let countriesData = [];
@@ -49,14 +52,15 @@ async function getCountries(url) {
   // Parse the fetched data as JSON
   const data = await result.json();
 
-  // Sort the fetched data by the country name in alphabetical order
-  data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+  // Store the fetched data in countriesData array so that the api fetch request only occurs once
+  countriesData = data;
+  console.log(countriesData);
+
+  // Filter and sort countries before displaying them
+  filterByRegionAndMisc();
 
   // Call showCountries() function to display the country data on the page
   showCountries(data);
-
-  // Store the fetched data in countriesData array so that the api fetch request only occurs once
-  countriesData = data;
 }
 
 // Async function that takes country code as an argument and finds the gdp of the country using an API
@@ -90,8 +94,9 @@ function showCountries(countries) {
     // Construct the flag image URL using the country code
     const flagImageUrl = `https://flagcdn.com/64x48/${cca2.toLowerCase()}.png`;
 
-    // Get the common name from the name object
+    // Get the common name and official from the name object
     const commonName = name.common;
+    const officialName = name.official;
 
     // Get the primary language
     const primaryLanguage =
@@ -141,7 +146,7 @@ function showCountries(countries) {
     countryEl.classList.add("country-card");
 
     // Set the inner HTML of the country card with the country data
-    countryEl.innerHTML = `<img src="${flagImageUrl}" alt="${commonName} Flag" class="country-flag" />
+    countryEl.innerHTML = `<img src="${flagImageUrl}" alt="${officialName} Flag" class="country-flag" />
       <div class="country-details">
         <h3 class="country-title">${commonName}</h3>
         <h4 class="country-population">
@@ -232,23 +237,37 @@ function transitionCards() {
 }
 
 // Function to filter the countries shown by what is selected in the filter by region menu
-function filterByRegion() {
+function filterByRegionAndMisc() {
   // Get the selected region from the region filter
   const selectedRegion = regionFilter.value;
+  // Get the selected misc filter
+  const selectedMiscFilter = miscFilter.value;
 
-  // If the selected region is "All", display all countries
-  if (selectedRegion === "All") {
-    showCountries(countriesData);
+  // Filter the countries based on the selected region and misc filter
+  const filteredCountries = countriesData.filter((country) => {
+    const regionMatch =
+      selectedRegion === "All" ||
+      country.subregion === selectedRegion ||
+      country.region === selectedRegion;
+
+    return regionMatch;
+  });
+
+  // Sort the filtered countries based on the selected misc filter
+  if (selectedMiscFilter === "highest-population") {
+    filteredCountries.sort((a, b) => b.population - a.population);
+  } else if (selectedMiscFilter === "lowest-population") {
+    filteredCountries.sort((a, b) => a.population - b.population);
   } else {
-    // Filter the countries based on the selected region
-    const filteredCountries = countriesData.filter(
-      (country) =>
-        country.subregion === selectedRegion ||
-        country.region === selectedRegion
+    // Default sorting - Sort by country name in alphabetical order
+    filteredCountries.sort((a, b) =>
+      a.name.common.localeCompare(b.name.common)
     );
-    //Passing the filtered countries into the showCountries function
-    showCountries(filteredCountries);
   }
+  // Add more sorting conditions here if needed
+
+  // Display the filtered countries
+  showCountries(filteredCountries);
 }
 
 // Function to populate the region filter menu
