@@ -236,27 +236,31 @@ function transitionCards() {
   });
 }
 
-// Function to filter the countries shown by what is selected in the filter by region menu
+// Function to filter the countries shown by what is selected in the filter by region menu, and misc menu
 function filterByRegionAndMisc() {
   // Get the selected region from the region filter
   const selectedRegion = regionFilter.value;
   // Get the selected misc filter
   const selectedMiscFilter = miscFilter.value;
 
-  // Filter the countries based on the selected region and misc filter
+  // Filter the countries based on the selected region
   const filteredCountries = countriesData.filter((country) => {
+    // Check if the selected region matches the country's region or subregion
     const regionMatch =
       selectedRegion === "All" ||
       country.subregion === selectedRegion ||
       country.region === selectedRegion;
 
+    // Return true if the country matches the selected region
     return regionMatch;
   });
 
   // Sort the filtered countries based on the selected misc filter
   if (selectedMiscFilter === "highest-population") {
+    // Sort by descending population
     filteredCountries.sort((a, b) => b.population - a.population);
   } else if (selectedMiscFilter === "lowest-population") {
+    // Sort by ascending population
     filteredCountries.sort((a, b) => a.population - b.population);
   } else {
     // Default sorting - Sort by country name in alphabetical order
@@ -266,10 +270,9 @@ function filterByRegionAndMisc() {
   }
   // Add more sorting conditions here if needed
 
-  // Display the filtered countries
+  // Display the filtered countries using the showCountries() function
   showCountries(filteredCountries);
 }
-
 // Function to populate the region filter menu
 function populateRegionFilter() {
   // Create a Set to store unique regions
@@ -328,12 +331,15 @@ function updateCountryCounter(count) {
   }, 200);
 }
 
+// This function formats gdp numbers
 function formatGdpPerCapita(number) {
+  // Using the Intl.NumberFormat object to format GDP numbers using the currency style and the USD currency
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: 0,
   });
 
+  // Then using the format() method of the formatter object on the GDP number. This returns a string with the appropriate symbol and thousands seperator
   return formatter.format(number);
 }
