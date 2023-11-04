@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>World Info Hub</title>
+    <link rel="icon" type="image/png" href="globe.png" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="filter-options">
+        <select id="region-filter">
+          <option value="All">Filter By Region: All</option>
+        </select>
+        <select name="misc-filter" id="misc-filter">
+          <option value="All">Filter A-Z</option>
+          <option value="highest-gdp">GDP: Highest</option>
+          <option value="lowest-gdp">GDP: Lowest</option>
+          <option value="highest-gdp-percapita">GDP Per Capita: Highest</option>
+          <option value="lowest-gdp-percapita">GDP Per Capita: Lowest</option>
+          <option value="highest-population">Population: Highest</option>
+          <option value="lowest-population">Population: Lowest</option>
+        </select>
+      </div>
+      <h1 id="title">W<i class="fas fa-globe globe-icon"></i>rld Info Hub</h1>
+      <form id="form">
+        <p id="country-counter">0 Countries</p>
+        <input
+          type="text"
+          class="search"
+          id="search-bar"
+          placeholder="Search..."
+        />
+        <button id="search-button">
+          <i id="search-icon" class="fa fa-search"></i>
+        </button>
+      </form>
+    </header>
+    <main class="main" id="main"></main>
+  </body>
+</html>
