@@ -9,3 +9,37 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Country {
+  id           Int        @id @default(autoincrement())
+  alpha2Code   String     @unique
+  alpha3Code   String     @unique
+  altSpellings String[]
+  area         Float?
+  borders      String[]
+  capital      String?
+  cioc         String?
+  continents   String[]
+  demonym      String?
+  flag         String?
+  gini         Float?
+  latlng       Float[]
+  name         String
+  nativeName   String
+  numericCode  String?
+  population   BigInt
+  region       String
+  subregion    String?
+  timezones    String[]
+  unMember     Boolean?
+  gdp          Float? // store the latest GDP value
+  gdpDate      DateTime? // The date when the GDP was last updated
+  currencies   Currency[] // Many-to-many relationship
+}
+
+model Currency {
+  id        Int       @id @default(autoincrement())
+  code      String    @unique
+  name      String
+  countries Country[] // Many-to-many relationship
+}
