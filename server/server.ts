@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+import path from "path";
 
 const app = express();
 
@@ -13,11 +14,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Import routes
+import countriesRoutes from "./routes/countriesRoutes";
 
 // Use routes
+app.use("/api", countriesRoutes);
 
 // Set the port that the server will listen on
 const PORT = process.env.PORT || 3000;
+
+// Serve static files from the 'client' directory
+app.use(express.static(path.join(__dirname, "../client")));
 
 // Start the server
 app.listen(PORT, () => {
