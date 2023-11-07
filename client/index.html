@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>World Info Hub</title>
     <link rel="icon" type="image/png" href="./assets/globe.png" />
-    <link href="./css/globals.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -15,7 +15,7 @@
   </head>
   <body>
     <header>
-      <div class="filter-options">
+      <div>
         <select id="region-filter">
           <option value="All">Filter By Region: All</option>
         </select>
@@ -29,9 +29,11 @@
           <option value="lowest-population">Population: Lowest</option>
         </select>
       </div>
-      <h1 id="title">W<i class="fas fa-globe globe-icon"></i>rld Info Hub</h1>
+
+      <h1>W<i class="fas fa-globe globe-icon"></i>rld Info Hub</h1>
+
       <form id="form">
-        <p id="country-counter">0 Countries</p>
+        <p id="country-counter" class="text-5xl">0 Countries</p>
         <input
           type="text"
           class="search"
@@ -43,6 +45,6 @@
         </button>
       </form>
     </header>
-    <main class="main" id="main"></main>
+    <main id="main"></main>
   </body>
 </html>

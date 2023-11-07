@@ -33,17 +33,20 @@
 }
 
 body {
-  background-color: var(--primary-darker);
+  background-color: rgba(0, 0, 0, 0.4);
+  background-image: url("../assets/herobg.jpg");
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-repeat: no-repeat;
   font-family: "Poppins", sans-serif;
   margin: 0;
 }
-
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 1rem;
+  padding: 0 1rem;
   background-color: var(--secondary-color);
   position: relative;
   min-width: 300px;
@@ -52,7 +55,6 @@ header {
 #title {
   display: flex;
   align-items: center;
-  margin-left: 8.5rem;
 }
 
 form {
@@ -86,6 +88,10 @@ form {
 option {
   font-family: inherit;
   font-weight: bold;
+}
+
+#country-counter {
+  margin-right: 1rem;
 }
 
 .search {
@@ -137,82 +143,4 @@ option {
 
 .globe-icon {
   font-size: 1.5rem;
-}
-
-main {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0.2rem;
-  justify-content: center;
-}
-
-.country-card {
-  user-select: none;
-  background-color: var(--primary-color);
-  border-radius: 5px;
-  border: 2px solid var(--hover-color);
-  padding: 1rem;
-  width: 300px;
-  margin: 0.2rem;
-  color: var(--secondary-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.4s, opacity 0.4s;
-}
-
-.country-card.filtered {
-  transform: translateY(20px);
-  opacity: 0;
-  pointer-events: none;
-}
-
-.country-card:hover {
-  transform: scale(0.97);
-}
-
-.country-flag {
-  max-width: 100%;
-  max-height: 150px;
-  height: auto;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.country-details {
-  margin-top: 1rem;
-}
-
-.country-title,
-.country-population,
-.country-language,
-.country-currency,
-.country-gdp,
-.country-gdp-percapita {
-  margin: 0;
-}
-
-.country-title {
-  text-decoration: underline;
-}
-
-.population-number,
-.language-name,
-.currency-code,
-.gdp,
-.gdp-percapita {
-  font-weight: normal;
-}
-
-#country-counter {
-  margin-right: 1.5rem;
-  font-family: inherit;
-  font-weight: bold;
-  opacity: 1;
-  transition: opacity 0.2s ease-in-out;
-}
-
-#country-counter.fade-out {
-  opacity: 0;
 }
