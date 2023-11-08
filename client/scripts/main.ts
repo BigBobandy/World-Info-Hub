@@ -43,8 +43,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     let fetchedCountries = await fetchCountries();
     allCountries = processCountries(fetchedCountries);
     populateRegionFilter(allCountries);
-    generateCountryCards(allCountries);
-    updateCountryCounter(allCountries.length);
+
+    // Apply filters immediately to sort alphabetically by default
+    currentFilters.misc = "alphabetical";
+    applyFilters();
 
     // Initialize search bar with a callback that filters and displays countries
     initializeSearchBar((searchTerm: string) => {

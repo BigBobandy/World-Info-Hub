@@ -56,8 +56,9 @@ export function sortCountries(
       return countries.sort(
         (a, b) => Number(a.population) - Number(b.population)
       );
-    default:
-      // If the criterion is "All" or anything else, sort alphabetically
+    case "alphabetical": // Add this case for explicit alphabetical sorting
       return countries.sort((a, b) => a.name.localeCompare(b.name));
+    default:
+      return countries; // If no criterion is specified, return unsorted
   }
 }
