@@ -46,7 +46,9 @@
 .country-capital,
 .country-region,
 .country-population,
-.country-area {
+.country-area,
+.country-gdp,
+.country-gdp-percapita {
   color: white;
   margin: 0.25em 0;
   font-size: 1em;
