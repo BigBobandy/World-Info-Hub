@@ -9,7 +9,7 @@
 }
 
 .country-card {
-  background-color: var(--primary-color);
+  background-color: rgba(35, 31, 32, 0.8);
   border: 2px solid var(--secondary-color);
   border-radius: 5px;
   overflow: hidden;

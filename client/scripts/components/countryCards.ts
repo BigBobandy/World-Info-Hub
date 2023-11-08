@@ -1,11 +1,16 @@
-import { Country } from "../types/country";
+import { Country } from "../types/country.js";
+import { updateCountryCounter } from "../utils/filters.js";
 import {
   formatArea,
   formatLargeNumber,
   formatPopulation,
 } from "../utils/formatters.js";
 
-// Function that generates a country card
+/**
+ * Generates country cards for each country in the array and updates the display.
+ *
+ * @param {Country[]} countries An array of country objects to display.
+ */
 export function generateCountryCards(countries: Country[]) {
   const gridContainer = document.querySelector(".grid-container");
 
@@ -59,4 +64,7 @@ export function generateCountryCards(countries: Country[]) {
     // Append the card to the main element
     gridContainer.appendChild(card);
   });
+
+  // After appending all country cards to the grid, update the counter
+  updateCountryCounter(countries.length);
 }
