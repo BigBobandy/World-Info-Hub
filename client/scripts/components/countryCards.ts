@@ -1,10 +1,6 @@
 import { Country } from "../types/country.js";
 import { updateCountryCounter } from "../utils/filters.js";
-import {
-  formatArea,
-  formatLargeNumber,
-  formatPopulation,
-} from "../utils/formatters.js";
+import { formatArea, formatLargeNumber } from "../utils/formatters.js";
 
 /**
  * Generates country cards for each country in the array and updates the display.
@@ -28,7 +24,7 @@ export function generateCountryCards(countries: Country[]) {
     card.classList.add("country-card");
 
     // Use the imported formatter functions
-    const formattedPopulation = formatPopulation(country.population);
+    const formattedPopulation = formatLargeNumber(country.population);
     const formattedArea = formatArea(country.area);
     // Construct the card content
     let cardContent = `
