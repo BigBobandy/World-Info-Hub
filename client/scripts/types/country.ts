@@ -31,3 +31,7 @@ export interface Currency {
   name: string;
   countries: Country[];
 }
+
+export interface ExtendedCountry extends Country {
+  gdpPerCapita?: number;
+}
