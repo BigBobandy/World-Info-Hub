@@ -6,6 +6,8 @@
  * @return {ExtendedCountry[]} - The sorted array of countries.
  */
 export function sortCountries(countries, criterion) {
+    // Debugging: Log the criterion to ensure it's being received correctly
+    console.log("Sorting by criterion:", criterion);
     switch (criterion) {
         case "highest-gdp":
             // Filter out countries without GDP data before sorting
@@ -16,11 +18,13 @@ export function sortCountries(countries, criterion) {
             const countriesWithGdpDataLow = countries.filter((country) => country.gdp !== null && country.gdp !== undefined);
             return countriesWithGdpDataLow.sort((a, b) => (a.gdp ?? 0) - (b.gdp ?? 0));
         case "highest-gdp-percapita":
-            // Assume that gdpPerCapita has been calculated beforehand
-            return countries.sort((a, b) => (b.gdpPerCapita ?? 0) - (a.gdpPerCapita ?? 0));
+            // Filter out countries without GDP per capita data before sorting
+            const countriesWithGdpPerCapitaDataHigh = countries.filter((country) => country.gdpPerCapita !== null && country.gdpPerCapita !== undefined);
+            return countriesWithGdpPerCapitaDataHigh.sort((a, b) => (b.gdpPerCapita ?? 0) - (a.gdpPerCapita ?? 0));
         case "lowest-gdp-percapita":
-            // Assume that gdpPerCapita has been calculated beforehand
-            return countries.sort((a, b) => (a.gdpPerCapita ?? 0) - (b.gdpPerCapita ?? 0));
+            // Filter out countries without GDP per capita data before sorting
+            const countriesWithGdpPerCapitaDataLow = countries.filter((country) => country.gdpPerCapita !== null && country.gdpPerCapita !== undefined);
+            return countriesWithGdpPerCapitaDataLow.sort((a, b) => (a.gdpPerCapita ?? 0) - (b.gdpPerCapita ?? 0));
         case "highest-population":
             return countries.sort((a, b) => Number(b.population) - Number(a.population));
         case "lowest-population":
