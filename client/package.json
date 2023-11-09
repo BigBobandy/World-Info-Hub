@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "npm-run-all --parallel watch:ts serve",
-    "serve": "browser-sync start --server --files 'client/**/*' --port 8000 --no-notify --no-ui",
-    "build:ts": "tsc",
-    "watch:ts": "tsc --watch"
+    "start": "serve -s build",
+    "build": "tsc",
+    "serve": "serve -s build -l 8080"
   },
   "keywords": [],
   "author": "",
