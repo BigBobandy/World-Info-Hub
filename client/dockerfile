@@ -1,23 +1,23 @@
+# Start from the Node.js base image
 FROM node:18
 
+# Set the working directory in the container
 WORKDIR /client
 
+# Install serve to serve your static files
+RUN npm install -g serve
+
+# Copy only the necessary files for running the server
+# This includes the build directory and any other assets or files needed for production
+COPY build/ ./build/
+COPY index.html ./
 COPY package*.json ./
 
-RUN npm install -g typescript
-
-RUN npm install --legacy-peer-deps
-
-# Copy source files
-COPY . .
-
-RUN chmod -R 777 /client
-
-# Build TypeScript files
-RUN npm run build
+# Install only production dependencies
+RUN npm install --only=production
 
 # Expose the port that 'serve' will listen on
 EXPOSE 8080
 
 # Start the server using 'serve'
-CMD ["npm", "start"]
+CMD ["serve", "-s", "build"]
