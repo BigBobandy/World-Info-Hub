@@ -7,14 +7,18 @@ WORKDIR /client
 # Install serve to serve your static files
 RUN npm install -g serve
 
-# Copy only the necessary files for running the server
-# This includes the build directory and any other assets or files needed for production
-COPY build/ ./build/
-COPY index.html ./
+# Copy the package.json and package-lock.json
 COPY package*.json ./
 
 # Install only production dependencies
 RUN npm install --only=production
+
+# Copy the pre-built JavaScript files and other necessary assets into the image
+COPY build/ ./build/
+COPY index.html ./
+COPY css/ ./css/
+COPY assets/ ./assets/
+
 
 # Expose the port that 'serve' will listen on
 EXPOSE 8080
