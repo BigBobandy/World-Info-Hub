@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "serve -s build",
-    "build": "tsc --outDir build",
+    "build": "npx tsc",
     "serve": "serve -s build -l 8080"
   },
   "keywords": [],
