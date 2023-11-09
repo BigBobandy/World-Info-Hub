@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "serve -s build",
+    "start": "npx serve -s build",
     "build": "tsc",
-    "serve": "serve -s build -l 8080"
+    "serve": "npx serve -s build -l 8080"
   },
   "keywords": [],
   "author": "",
