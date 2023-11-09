@@ -1,27 +1,21 @@
-# Use a Node.js base image
 FROM node:18-alpine
 
-# Set the working directory in the container
-WORKDIR /app
+WORKDIR /client
 
-# Copy package.json and package-lock.json (or npm-shrinkwrap.json)
+
 COPY package*.json ./
 
-# Install dependencies including 'devDependencies' since they're needed for the build
+
 RUN npm install --legacy-peer-deps
 
-# Copy the rest of the client code
+
 COPY . .
 
-# Ensure correct permissions for node_modules and the .bin directory
-RUN chmod -R 755 ./node_modules
-RUN chmod -R 755 ./node_modules/.bin
 
-# Build the TypeScript files
-RUN npx tsc
+RUN npm run build
 
-# Expose the port your app will run on
+
 EXPOSE 8080
 
-# Serve the static files
+
 CMD ["npm", "start"]
