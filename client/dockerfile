@@ -1,13 +1,17 @@
-FROM node:18-alpine
+FROM node:18
 
 WORKDIR /client
 
 COPY package*.json ./
 
+RUN npm install -g typescript
+
 RUN npm install --legacy-peer-deps
 
 # Copy source files
 COPY . .
+
+RUN chmod -R 777 /client
 
 # Build TypeScript files
 RUN npm run build
