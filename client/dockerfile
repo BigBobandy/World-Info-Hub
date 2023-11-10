@@ -10,6 +10,8 @@ COPY package*.json ./
 # Install only production dependencies using the newer flag
 RUN npm install --omit=dev
 
+RUN chmod -R 755 /client
+
 # Copy the pre-built JavaScript files from the build directory
 COPY build/ ./build/
 
@@ -22,4 +24,5 @@ COPY index.html ./build/
 EXPOSE 8080
 
 # Start the server using 'serve' to serve the 'build' directory
-CMD ["npx", "serve", "-s", "build"]
+CMD ["./node_modules/.bin/serve", "-s", "build"]
+
