@@ -7,22 +7,17 @@ WORKDIR /client
 # Copy the package.json and package-lock.json
 COPY package*.json ./
 
-# Install only production dependencies using the newer flag
-RUN npm install --omit=dev
+# Install dependencies (serve is included)
+RUN npm install --legacy-peer-deps --omit=dev
 
-RUN chmod -R 755 /client
+# Copy the pre-built JavaScript files and static assets into the container
+COPY . .
 
-# Copy the pre-built JavaScript files from the build directory
-COPY build/ ./build/
-
-# Copy other static assets
-COPY css/ ./build/css/
-COPY assets/ ./build/assets/
-COPY index.html ./build/
+# Build the TypeScript files
+RUN npm run build
 
 # Expose the port that 'serve' will listen on
 EXPOSE 8080
 
-# Start the server using 'serve' to serve the 'build' directory
-CMD ["./node_modules/.bin/serve", "-s", "build"]
-
+# Start the server using the locally installed 'serve'
+CMD [ "npm", "start" ]

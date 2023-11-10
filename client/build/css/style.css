@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap");
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+:root {
+  --primary-color: #231f20;
+  --primary-darker: #1c191a;
+  --secondary-color: #ffc629;
+  --border-color: #b0b3b2;
+  --hover-color: #fab700;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Media query for screens smaller than 600px */
+@media (max-width: 600px) {
+  #title {
+    margin-left: 0;
+  }
+
+  form {
+    position: static;
+    margin-top: 1rem;
+  }
+
+  .filter-options {
+    margin-left: 0;
+  }
+
+  #region-filter {
+    margin-right: 0.5rem;
+  }
+}
+
+body {
+  background-image: url("../assets/herobg.jpg");
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+  background-color: var(--secondary-color);
+  position: relative;
+  min-width: 300px;
+}
+
+#title {
+  display: flex;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  align-items: center;
+}
+
+.filter-options {
+  display: flex;
+  margin-left: 1rem;
+}
+
+#region-filter,
+#misc-filter {
+  user-select: none;
+  font-family: inherit;
+  font-weight: bold;
+  background-color: var(--secondary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 5px;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+#region-filter:focus,
+#misc-filter {
+  outline: none;
+}
+
+option {
+  font-family: inherit;
+  font-weight: bold;
+}
+
+#country-counter {
+  margin-right: 1rem;
+}
+
+.search {
+  display: flex;
+  justify-content: flex-end;
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  color: var(--primary-color);
+  width: 200px;
+}
+
+.search::placeholder {
+  color: var(--primary-color);
+}
+
+.search:focus {
+  outline: none;
+  background-color: var(--hover-color);
+}
+
+.search:hover {
+  background-color: var(--hover-color);
+}
+
+#search-button {
+  padding: 15px 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+#search-button:active {
+  transform: scale(0.97);
+}
+
+#search-icon {
+  color: var(--secondary-color);
+}
+
+.globe-icon {
+  font-size: 1.5rem;
+}
