@@ -4,23 +4,29 @@ FROM node:18
 # Set the working directory in the container
 WORKDIR /client
 
+# Install 'serve' to serve your static files
+RUN npm install -g serve
+
 # Copy the package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies (serve is included)
-RUN npm install --legacy-peer-deps --omit=dev
+RUN npm install --only=production
 
 # Copy the pre-built JavaScript files and static assets into the container
-COPY . .
+COPY build/ ./build/
 
-RUN chmod -R 755 /client
+# Copy other static assets
+COPY css/ ./build/css/
+COPY assets/ ./build/assets/
+COPY index.html ./build/
 
 
 # Expose the port that 'serve' will listen on
 EXPOSE 8080
 
 # Start the server using the locally installed 'serve'
-CMD ["npx", "http-server", "build", "-p", "8080"]
+CMD ["serve", "-s", "build"]
 
 
 

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "http-server build -p 8080",
-    "serve": "http-server build -p 8080"
+    "start": "serve -s build",
+    "serve": "serve -s build -l 8080"
   },
   "keywords": [],
   "author": "",
