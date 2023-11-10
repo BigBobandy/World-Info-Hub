@@ -1,6 +1,6 @@
 export const fetchCountries = async () => {
   try {
-    const response = await fetch("http://localhost:7338/api/countries");
+    const response = await fetch("http://localhost:6385/api/countries");
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
