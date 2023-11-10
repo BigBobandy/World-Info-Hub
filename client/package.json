@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "npx serve -s build",
-    "serve": "npx serve -s build -l 8080"
+    "start": "http-server build -p 8080",
+    "serve": "http-server build -p 8080"
   },
   "keywords": [],
   "author": "",

@@ -1,9 +1,6 @@
 # Use the Node.js base image
 FROM node:18
 
-ENV NPM_CONFIG_LOGLEVEL verbose
-
-
 # Set the working directory in the container
 WORKDIR /client
 
@@ -14,7 +11,7 @@ COPY package*.json ./
 RUN npm install --legacy-peer-deps --omit=dev
 
 # Copy the pre-built JavaScript files and static assets into the container
-COPY build/ ./build/
+COPY . .
 
 RUN chmod -R 755 /client
 
@@ -23,6 +20,7 @@ RUN chmod -R 755 /client
 EXPOSE 8080
 
 # Start the server using the locally installed 'serve'
-CMD ["npx", "serve", "-s", "build"]
+CMD ["npx", "http-server", "build", "-p", "8080"]
+
 
 
