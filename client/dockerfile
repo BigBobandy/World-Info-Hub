@@ -13,8 +13,11 @@ RUN npm install --legacy-peer-deps --omit=dev
 # Copy the pre-built JavaScript files and static assets into the container
 COPY build/ ./build/
 
+RUN chmod +x ./node_modules/.bin/serve
+
 # Expose the port that 'serve' will listen on
 EXPOSE 8080
 
 # Start the server using the locally installed 'serve'
-CMD ["./node_modules/.bin/serve", "-s", "build"]
+CMD ["serve", "-s", "build"]
+
