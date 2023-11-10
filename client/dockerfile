@@ -21,6 +21,7 @@ COPY css/ ./build/css/
 COPY assets/ ./build/assets/
 COPY index.html ./build/
 
+RUN chmod -R 755 /client
 
 # Expose the port that 'serve' will listen on
 EXPOSE 8080
