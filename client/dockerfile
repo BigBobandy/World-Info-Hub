@@ -17,4 +17,4 @@ COPY build/ ./build/
 EXPOSE 8080
 
 # Start the server using the locally installed 'serve'
-CMD ["serve", "-s", "build"]
+CMD ["./node_modules/.bin/serve", "-s", "build"]
