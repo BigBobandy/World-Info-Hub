@@ -4,14 +4,11 @@ FROM node:18
 # Set the working directory in the container
 WORKDIR /client
 
-# Install 'serve' to serve your static files
-RUN npm install -g serve
-
 # Copy the package.json and package-lock.json
 COPY package*.json ./
 
-# Install only production dependencies
-RUN npm install --only=production
+# Install only production dependencies using the newer flag
+RUN npm install --omit=dev
 
 # Copy the pre-built JavaScript files from the build directory
 COPY build/ ./build/
@@ -25,4 +22,4 @@ COPY index.html ./build/
 EXPOSE 8080
 
 # Start the server using 'serve' to serve the 'build' directory
-CMD ["serve", "-s", "build"]
+CMD ["npx", "serve", "-s", "build"]
