@@ -1,32 +1,19 @@
-# Use the Node.js base image
 FROM node:18
 
-# Set the working directory in the container
 WORKDIR /client
 
-# Install 'serve' to serve your static files
 RUN npm install -g serve
 
-# Copy the package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies (serve is included)
 RUN npm install --only=production
 
-# Copy the pre-built JavaScript files and static assets into the container
 COPY build/ ./build/
-
-# Copy other static assets
-COPY css/ ./build/css/
-COPY assets/ ./build/assets/
-COPY index.html ./build/
 
 RUN chmod -R 755 /client
 
-# Expose the port that 'serve' will listen on
 EXPOSE 8080
 
-# Start the server using the locally installed 'serve'
 CMD ["serve", "-s", "build"]
 
 
