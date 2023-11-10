@@ -1,7 +1,7 @@
 export const fetchCountries = async () => {
   try {
     const response = await fetch(
-      "https://back-end-production-1ccf.up.railway.app/api/countries"
+      "https://wih-server.up.railway.app/api/countries"
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
