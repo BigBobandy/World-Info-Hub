@@ -16,4 +16,4 @@ World Bank GDP API:
 API Documentation: https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation
 World Bank Data Website: https://data.worldbank.org/indicator/NY.GDP.MKTP.CD
 
-Also used https://flagcdn.com/ for the flag images
+
